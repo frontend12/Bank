@@ -25,13 +25,19 @@ public class BankService {
     }
 
 
+//    Здесь был лишний параметр с типом но без переменной.
+
+//    По сути принимаем простой pojo сюда, извлекаем id-клиентов(как понял) ну и обращаемся к слою репозиторию.
     public void makeTransfer(TransferBalance transferBalance){
         Long from = transferBalance.getFrom();
         Long to = transferBalance.getTo();
 
         BigDecimal amount = transferBalance.getAmount();
 
+
+//        У одного вычитаем баланс
         repository.addBalanceForId(to, amount);
+//        К другому прибавляем
         repository.removeBalanceForId(from, amount);
     }
 }
