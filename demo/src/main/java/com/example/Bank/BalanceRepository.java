@@ -13,6 +13,14 @@ public class BalanceRepository {
 
 
     public BigDecimal getBalanceForId(Long accountId){
-        return storage.get(accountId)
+        return storage.get(accountId);
+    }
+
+    public BigDecimal addBalanceForId(Long to, BigDecimal amount) {
+        return storage.computeIfPresent(to, (k, v) -> v.add(amount));
+    }
+
+    public BigDecimal removeBalanceForId(Long to, BigDecimal amount) {
+        return storage.computeIfPresent(to, (k, v) -> v.subtract(amount));
     }
 }

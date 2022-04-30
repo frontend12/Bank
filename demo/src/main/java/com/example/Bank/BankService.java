@@ -10,11 +10,9 @@ import java.math.BigDecimal;
 @Service
 @AllArgsConstructor
 public class BankService {
-    private final BalanceController repository;
+    private final BalanceRepository repository;
 
-
-
-    public BigDecimal getBalance(Long accountId){
+    public BigDecimal getBalance(Long accountId) throws IllegalAccessException {
         BigDecimal balance = repository.getBalanceForId(accountId);
         if (balance == null){
             throw new IllegalAccessException();
@@ -23,11 +21,17 @@ public class BankService {
     }
 
     public BigDecimal addMoney(Long to, BigDecimal amount){
-        return null;
+        return repository.addBalanceForId(to, amount);
     }
 
 
-    public void makeTransfer(TransferBalance, TransferBalance TransferBalance){
+    public void makeTransfer(TransferBalance transferBalance){
+        Long from = transferBalance.getFrom();
+        Long to = transferBalance.getTo();
 
+        BigDecimal amount = transferBalance.getAmount();
+
+        repository.addBalanceForId(to, amount);
+        repository.removeBalanceForId(from, amount);
     }
 }

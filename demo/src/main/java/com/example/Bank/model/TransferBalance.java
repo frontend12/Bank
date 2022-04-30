@@ -13,8 +13,14 @@ public class TransferBalance {
     private BigDecimal amount;
 
     public Long getTo() {
+        return to;
     }
 
-    public BigDecimal getAmout() {
+    public Long getFrom() {
+        return from;
+    }
+
+    public BigDecimal getAmount() {
+        return amount;
     }
 }

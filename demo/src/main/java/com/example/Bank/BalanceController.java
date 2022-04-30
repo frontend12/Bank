@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.*;
 import java.math.BigDecimal;
 
 @RestController("/balance")
-@AllArgsConstructor
 public class BalanceController {
 
     private final BankService bankService;
@@ -20,17 +19,14 @@ public class BalanceController {
     }
 
     @GetMapping("/{accountId}")
-    public BigDecimal getBalance(@PathVariable Long accountId){
+    public BigDecimal getBalance(@PathVariable Long accountId) throws IllegalAccessException {
         return bankService.getBalance(accountId);
-
-
     }
 
 
     @PostMapping("/add")
     public BigDecimal addMoney(@RequestBody TransferBalance transferBalance){
-        return bankService.addMoney(transferBalance.getTo(), transferBalance.getAmout());
-
+        return bankService.addMoney(transferBalance.getTo(), transferBalance.getAmount());
     }
 
     @PostMapping("/transfer")
