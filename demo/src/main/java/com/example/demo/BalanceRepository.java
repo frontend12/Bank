@@ -1,4 +1,4 @@
-package com.example.Bank;
+package com.example.demo;
 
 import org.springframework.stereotype.Repository;
 

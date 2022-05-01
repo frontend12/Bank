@@ -1,25 +1,23 @@
-package com.example.Bank;
+package com.example.demo;
 
-
-import com.example.Bank.model.TransferBalance;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
+import com.example.demo.model.TransferBalance;
+import lombok.AllArgsConstructor;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController("/balance")
+@AllArgsConstructor
 public class BalanceController {
 
     private final BankService bankService;
 
-    public BalanceController(BankService bankService) {
-        this.bankService = bankService;
-    }
-
     @GetMapping("/{accountId}")
-    public BigDecimal getBalance(@PathVariable Long accountId) throws IllegalAccessException {
+    public BigDecimal getBalance(@PathVariable Long accountId) {
         return bankService.getBalance(accountId);
     }
 

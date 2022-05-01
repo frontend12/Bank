@@ -1,7 +1,8 @@
-package com.example.Bank;
+package com.example.demo;
 
 
-import com.example.Bank.model.TransferBalance;
+import com.example.demo.exception.ExceptionErrorBalance;
+import com.example.demo.model.TransferBalance;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -12,10 +13,10 @@ import java.math.BigDecimal;
 public class BankService {
     private final BalanceRepository repository;
 
-    public BigDecimal getBalance(Long accountId) throws IllegalAccessException {
+    public BigDecimal getBalance(Long accountId) {
         BigDecimal balance = repository.getBalanceForId(accountId);
         if (balance == null){
-            throw new IllegalAccessException();
+            throw new ExceptionErrorBalance("There is no money on the balance");
         }
         return balance;
     }
